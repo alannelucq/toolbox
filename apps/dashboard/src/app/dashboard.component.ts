@@ -3,7 +3,7 @@ import { MissionSummaryCardComponent } from "./components/mission-summary-card.c
 import { StubMissionBuilder } from "./core/models/builders/mission.builder";
 import { NgForOf } from "@angular/common";
 import { MissionDetailComponent } from "./components/mission-detail.component";
-import { MetricsComponent } from "./components/metrics.component";
+import { MetricsComponent } from "./components/metrics/metrics.component";
 
 @Component({
   selector: 'toolbox-dashboard',
@@ -15,33 +15,26 @@ import { MetricsComponent } from "./components/metrics.component";
           </div>
           <toolbox-mission-detail/>
       </div>
-
   `,
   styles: [
     `
         :host {
             height: 100%;
             display: grid;
-            grid-template-rows: 2fr 3fr;
+            grid-template-rows: 1fr 2fr;
+        }
 
-            .missions-grid {
-                display: grid;
-                grid-template-columns: 1fr 350px;
+        .missions-grid {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            padding: 24px;
+        }
 
-                & > * {
-                    height: 100%;
-                    padding: 32px;
-                }
-            }
-        ;
-
-            .missions-container {
-                /*justify-content: center;*/
-                display: grid;
-                grid-template-columns: repeat(auto-fill, 300px);
-                grid-template-rows: repeat(auto-fill, 120px);
-                gap: 16px;
-            }
+        .missions-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 300px);
+            grid-template-rows: repeat(auto-fill, 130px);
+            gap: 16px;
         }
     `
   ],
