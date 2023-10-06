@@ -1,7 +1,7 @@
-import { providerAnimation } from "@angular/platform-browser/animations";
 import { TuiRootModule } from "@taiga-ui/core";
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
+import { provideAnimations } from "@angular/platform-browser/animations";
 
 export const appConfig: ApplicationConfig = {
-  providers: [providerAnimation(), importProvidersFrom(TuiRootModule)],
+  providers: [provideAnimations(), importProvidersFrom(TuiRootModule)],
 };
