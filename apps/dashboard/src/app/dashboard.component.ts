@@ -3,11 +3,12 @@ import { MissionSummaryCardComponent } from "./components/mission-summary-card.c
 import { StubMissionBuilder } from "./core/models/builders/mission.builder";
 import { NgForOf } from "@angular/common";
 import { MissionDetailComponent } from "./components/mission-detail.component";
+import { MetricsComponent } from "./components/metrics.component";
 
 @Component({
   selector: 'toolbox-dashboard',
   template: `
-      <div>Metrics</div>
+      <toolbox-metrics/>
       <div class="missions-grid">
           <div class="missions-container">
               <toolbox-mission-summary-card *ngFor="let mission of missions" [mission]="mission"/>
@@ -21,7 +22,7 @@ import { MissionDetailComponent } from "./components/mission-detail.component";
         :host {
             height: 100%;
             display: grid;
-            grid-template-rows: 1fr 2fr;
+            grid-template-rows: 2fr 3fr;
 
             .missions-grid {
                 display: grid;
@@ -29,13 +30,13 @@ import { MissionDetailComponent } from "./components/mission-detail.component";
 
                 & > * {
                     height: 100%;
-                    padding: 16px;
+                    padding: 32px;
                 }
             }
         ;
 
             .missions-container {
-                justify-content: center;
+                /*justify-content: center;*/
                 display: grid;
                 grid-template-columns: repeat(auto-fill, 300px);
                 grid-template-rows: repeat(auto-fill, 120px);
@@ -44,7 +45,7 @@ import { MissionDetailComponent } from "./components/mission-detail.component";
         }
     `
   ],
-  imports: [MissionSummaryCardComponent, NgForOf, MissionDetailComponent],
+  imports: [MissionSummaryCardComponent, NgForOf, MissionDetailComponent, MetricsComponent],
   standalone: true
 })
 export class DashboardComponent {
