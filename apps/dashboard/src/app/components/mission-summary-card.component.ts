@@ -1,16 +1,16 @@
-import { booleanAttribute, Component, Input } from '@angular/core';
+import { booleanAttribute, ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { TuiAvatarModule, TuiIslandModule } from "@taiga-ui/kit";
 import { Mission } from "../core/models/mission.model";
 
 @Component({
-  selector: 'toolbox-mission-card',
+  selector: 'toolbox-mission-summary-card',
   template: `
       <tui-island [hoverable]="true" [class.selected]="selected" size="m">
           <div class="row">
               <tui-avatar size="m" [text]="mission.name" [rounded]="true"/>
               <div>
                   <h3 class="tui-island__title">{{ mission.name }}</h3>
-                  <p class="tui-island__paragraph">{{ mission.description }}</p>
+                  <p class="tui-island__paragraph">{{ mission.role }}</p>
               </div>
           </div>
       </tui-island>
@@ -40,11 +40,11 @@ import { Mission } from "../core/models/mission.model";
     TuiIslandModule,
     TuiAvatarModule
   ],
-  standalone: true
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class MissionCardComponent {
+export class MissionSummaryCardComponent {
   @Input({required: true}) mission: Mission;
   @Input({transform: booleanAttribute}) selected = false;
-
 }

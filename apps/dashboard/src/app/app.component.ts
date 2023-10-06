@@ -16,6 +16,7 @@ import { DashboardComponent } from "./dashboard.component";
   styles: [
     `tui-root {
         height: 100%;
+        background: var(--tui-base-02);
     }`
   ],
   providers: [{provide: TUI_SANITIZER, useClass: NgDompurifySanitizer}]

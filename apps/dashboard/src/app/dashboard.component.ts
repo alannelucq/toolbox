@@ -1,18 +1,20 @@
 import { Component } from '@angular/core';
-import { MissionCardComponent } from "./components/mission-card.component";
+import { MissionSummaryCardComponent } from "./components/mission-summary-card.component";
 import { StubMissionBuilder } from "./core/models/builders/mission.builder";
 import { NgForOf } from "@angular/common";
+import { MissionDetailComponent } from "./components/mission-detail.component";
 
 @Component({
   selector: 'toolbox-dashboard',
   template: `
       <div>Metrics</div>
-      <div class="missions-container">
-          <toolbox-mission-card
-              *ngFor="let mission of missions"
-              [mission]="mission"
-          />
+      <div class="missions-grid">
+          <div class="missions-container">
+              <toolbox-mission-summary-card *ngFor="let mission of missions" [mission]="mission"/>
+          </div>
+          <toolbox-mission-detail/>
       </div>
+
   `,
   styles: [
     `
@@ -21,27 +23,41 @@ import { NgForOf } from "@angular/common";
             display: grid;
             grid-template-rows: 1fr 2fr;
 
-            & > * {
-                border: 2px solid blue;
+            .missions-grid {
+                display: grid;
+                grid-template-columns: 1fr 350px;
+
+                & > * {
+                    height: 100%;
+                    padding: 16px;
+                }
             }
+        ;
 
             .missions-container {
                 justify-content: center;
                 display: grid;
                 grid-template-columns: repeat(auto-fill, 300px);
                 grid-template-rows: repeat(auto-fill, 120px);
-                padding: 32px;
                 gap: 16px;
             }
         }
     `
   ],
-  imports: [MissionCardComponent, NgForOf],
+  imports: [MissionSummaryCardComponent, NgForOf, MissionDetailComponent],
   standalone: true
 })
 export class DashboardComponent {
 
   missions = [
+    new StubMissionBuilder()
+      .withName("Elazur")
+      .withDescription("Lead Dev Fullstack")
+      .build(),
+    new StubMissionBuilder()
+      .withName("Oreco")
+      .withDescription("Lead Dev Front-end")
+      .build(),
     new StubMissionBuilder()
       .withName("Octoplus Consulting")
       .withDescription("Développeur Fullstack")
