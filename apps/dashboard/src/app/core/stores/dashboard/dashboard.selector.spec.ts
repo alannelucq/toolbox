@@ -82,18 +82,43 @@ describe('Dashboard Selectors', () => {
     expect(DashboardSelector.selectedMissionDetail()(missions, selectedMissionId)).toBeNull();
   });
 
-  it('should compute metrics', () => {
+  it('should aggregate metrics', () => {
     withToday(on('01/06/2023'));
     const missions = [
       new StubMissionBuilder()
-        .withInvoices(generateInvoices({name: 'Stubby Company', workDaysCount: 20, dailyRate: 500, count: 4, begin: on('01/12/2022')}))
+        .withId('id-stubby-company')
+        .withInvoices(generateInvoices({name: 'Stubby Company', workDaysCount: 20, dailyRate: 500, count: 3, begin: on('01/12/2022')}))
+        .build(),
+      new StubMissionBuilder()
+        .withId('id-fancy-company')
+        .withInvoices(generateInvoices({name: 'Fancy Company', workDaysCount: 20, dailyRate: 500, count: 2, begin: on('01/03/2023')}))
         .build()
     ];
+    const selectedMissionId = null;
+    expect(DashboardSelector.metrics()(missions, selectedMissionId)).toEqual({
+      totalWorkedDaysCount: 80,
+      totalRevenues: 40_000,
+      revenues: [10_000, 10_000, 10_000, 10_000, 0, 0, 0, 0, 0, 0, 0, 0]
+    });
+  });
 
-    expect(DashboardSelector.metrics()(missions)).toEqual({
-      totalWorkedDaysCount: 60,
-      totalRevenues: 30_000,
-      revenues: [10_000, 10_000, 10_000, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  it('should retrieve metrics from selected mission', () => {
+    withToday(on('01/06/2023'));
+    const missions = [
+      new StubMissionBuilder()
+        .withId('id-stubby-company')
+        .withInvoices(generateInvoices({name: 'Stubby Company', workDaysCount: 20, dailyRate: 500, count: 1, begin: on('01/01/2023')}))
+        .build(),
+      new StubMissionBuilder()
+        .withId('id-fancy-company')
+        .withInvoices(generateInvoices({name: 'Fancy Company', workDaysCount: 20, dailyRate: 500, count: 1, begin: on('01/02/2023')}))
+        .build()
+    ];
+    const selectedMissionId = 'id-stubby-company';
+    expect(DashboardSelector.metrics()(missions, selectedMissionId)).toEqual({
+      totalWorkedDaysCount: 20,
+      totalRevenues: 10_000,
+      revenues: [10_000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     });
   });
 });
