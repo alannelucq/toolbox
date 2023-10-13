@@ -1,16 +1,15 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Contact } from "../../../core/models/contact.model";
 import { TuiAvatarModule, TuiIslandModule } from "@taiga-ui/kit";
 import { TuiSvgModule } from "@taiga-ui/core";
+import { ContactSummary } from "../../../core/models/contact-summary.model";
 
 @Component({
   selector: 'toolbox-contact-card',
   template: `
-      <tui-avatar size="l" [text]="contact.firstName + ' ' + contact.lastName" [rounded]="true"/>
+      <tui-avatar size="l" [text]="contact.name" [rounded]="true"/>
       <div class="infos">
-          <p class="title">{{ contact.firstName + ' ' + contact.lastName }}</p>
+          <p class="title">{{ contact.name }}</p>
           <p class="mail">{{ contact.email }}</p>
-          <p class="phone">{{ contact.phone }}</p>
       </div>
   `,
   styles: [
@@ -30,7 +29,7 @@ import { TuiSvgModule } from "@taiga-ui/core";
                 font-weight: 400;
             }
 
-            &.mail, &.phone {
+            &.mail {
                 font-weight: 100;
                 font-size: 0.9rem;
                 line-height: 1.2rem;
@@ -45,5 +44,5 @@ import { TuiSvgModule } from "@taiga-ui/core";
 })
 
 export class ContactCardComponent {
-  @Input({required: true}) contact: Contact;
+  @Input({required: true}) contact: ContactSummary;
 }

@@ -1,5 +1,6 @@
 import { createPropertySelectors, createSelector } from "@ngxs/store";
 import { DashboardState, DashboardStateModel } from "./dashboard.state";
+import { MissionDetail } from "../../models/mission-detail.model";
 
 export class DashboardSelector {
 
@@ -14,5 +15,30 @@ export class DashboardSelector {
         role: mission.role,
         selected: mission.id === selectedMissionId
       })))
+  }
+
+  static selectedMissionDetail() {
+    return createSelector(
+      [DashboardSelector.slices.missions, DashboardSelector.slices.selectedMissionId],
+      (missions, selectedMissionId) => {
+        const mission = missions.find(mission => mission.id === selectedMissionId);
+        if (!mission) return null;
+        const lastInvoice = mission?.invoices[mission.invoices.length - 1];
+
+        return {
+          name: mission.name,
+          description: mission.description,
+          skills: mission.skills,
+          lastInvoice: {
+            month: lastInvoice.month,
+            dailyRate: lastInvoice.dailyRate,
+          },
+          contact: {
+            name: `${mission.contact.firstName} ${mission.contact.lastName}`,
+            email: mission.contact.email,
+          },
+        } as MissionDetail
+      }
+    )
   }
 }

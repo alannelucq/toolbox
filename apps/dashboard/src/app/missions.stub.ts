@@ -16,7 +16,7 @@ const MISSION_COMPANY_A = new MissionBuilder()
       .withPhone('06 12 34 56 78')
       .build()
   )
-  .withSkills(['Angular', 'RxJS', 'TypeScript', 'NGXS', 'Jest', 'Cypress'])
+  .withSkills(['Angular', 'RxJS', 'TypeScript', 'Jest', 'Cypress'])
   .withInvoices(generateInvoices({name: 'Stubby Company', dailyRate: 500, count: 3, begin: on('01/01/2021')}))
   .build();
 
@@ -50,10 +50,9 @@ const MISSION_COMPANY_C = new MissionBuilder()
       .withPhone('06 12 34 56 78')
       .build()
   )
-  .withSkills(['Angular', 'RxJS', 'TypeScript', 'NGXS', 'Jest', 'Cypress'])
+  .withSkills(['Angular', 'RxJS', 'TypeScript', 'Jest'])
   .withInvoices(generateInvoices({name: 'Big Bank Company', dailyRate: 800, count: 6, begin: on('01/08/2021')}))
   .build();
-
 
 function generateInvoices(options: { name: string, dailyRate: number, count: number, begin: Date }) {
   const {name, dailyRate, count, begin} = options;

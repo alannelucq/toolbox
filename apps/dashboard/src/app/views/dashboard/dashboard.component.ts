@@ -20,7 +20,7 @@ import { SelectMission } from "../../core/stores/dashboard/dashboard.action";
                   (click)="selectMission(mission.id)"
               />
           </div>
-          <toolbox-mission-detail/>
+          <toolbox-mission-detail [detail]="detail()"/>
       </div>
   `,
   styles: [
@@ -51,7 +51,10 @@ import { SelectMission } from "../../core/stores/dashboard/dashboard.action";
 export default class DashboardComponent {
   store = inject(Store);
   missions = toSignal(this.store.select(DashboardSelector.summaries()));
-
+  detail = toSignal(
+    inject(Store).select(DashboardSelector.selectedMissionDetail()),
+    {initialValue: null}
+  );
   selectMission(missionId: string) {
     this.store.dispatch(new SelectMission(missionId));
   }
