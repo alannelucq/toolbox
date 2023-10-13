@@ -6,6 +6,7 @@ import { MetricsComponent } from "./components/metrics/metrics.component";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { DashboardSelector } from "../../core/stores/dashboard/dashboard.selector";
 import { Store } from "@ngxs/store";
+import { SelectMission } from "../../core/stores/dashboard/dashboard.action";
 
 @Component({
   selector: 'toolbox-dashboard',
@@ -13,7 +14,11 @@ import { Store } from "@ngxs/store";
       <toolbox-metrics/>
       <div class="missions-grid">
           <div class="missions-container">
-              <toolbox-mission-summary *ngFor="let mission of missions()" [mission]="mission"/>
+              <toolbox-mission-summary
+                  *ngFor="let mission of missions()"
+                  [mission]="mission"
+                  (click)="selectMission(mission.id)"
+              />
           </div>
           <toolbox-mission-detail/>
       </div>
@@ -46,4 +51,8 @@ import { Store } from "@ngxs/store";
 export default class DashboardComponent {
   store = inject(Store);
   missions = toSignal(this.store.select(DashboardSelector.summaries()));
+
+  selectMission(missionId: string) {
+    this.store.dispatch(new SelectMission(missionId));
+  }
 }

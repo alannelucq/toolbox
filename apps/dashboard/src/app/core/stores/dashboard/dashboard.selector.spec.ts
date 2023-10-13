@@ -9,10 +9,17 @@ describe('Dashboard Selectors', () => {
         .withId('id-fancy-company')
         .withName('Fancy Company')
         .withRole('Lead dev Front-end')
+        .build(),
+      new StubMissionBuilder()
+        .withId('id-uber')
+        .withName('Uber')
+        .withRole('Lead dev Front-end')
         .build()
     ];
-    expect(DashboardSelector.summaries()(missions)).toEqual([
-      {id: 'id-fancy-company', name: 'Fancy Company', role: 'Lead dev Front-end'}
+    const selectedMissionId = 'id-fancy-company';
+    expect(DashboardSelector.summaries()(missions, selectedMissionId)).toEqual([
+      {id: 'id-fancy-company', name: 'Fancy Company', role: 'Lead dev Front-end', selected: true},
+      {id: 'id-uber', name: 'Uber', role: 'Lead dev Front-end', selected: false},
     ]);
   });
 });

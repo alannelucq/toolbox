@@ -1,11 +1,12 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { TuiAvatarModule, TuiIslandModule } from "@taiga-ui/kit";
 import { MissionSummary } from "../../../core/models/mission-summary.model";
+import { NgClass } from "@angular/common";
 
 @Component({
   selector: 'toolbox-mission-summary',
   template: `
-      <tui-island [hoverable]="true" size="m">
+      <tui-island [hoverable]="true" size="m" [ngClass]="{selected: mission.selected}">
           <div class="row">
               <tui-avatar size="m" [text]="mission.name" [rounded]="true"/>
               <div>
@@ -38,7 +39,8 @@ import { MissionSummary } from "../../../core/models/mission-summary.model";
   ],
   imports: [
     TuiIslandModule,
-    TuiAvatarModule
+    TuiAvatarModule,
+    NgClass
   ],
   standalone: true,
   changeDetection: ChangeDetectionStrategy.OnPush

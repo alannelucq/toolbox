@@ -7,11 +7,12 @@ export class DashboardSelector {
 
   static summaries() {
     return createSelector(
-      [DashboardSelector.slices.missions],
-      missions => missions.map(mission => ({
+      [DashboardSelector.slices.missions, DashboardSelector.slices.selectedMissionId],
+      (missions, selectedMissionId) => missions.map(mission => ({
         id: mission.id,
         name: mission.name,
-        role: mission.role
+        role: mission.role,
+        selected: mission.id === selectedMissionId
       })))
   }
 }
