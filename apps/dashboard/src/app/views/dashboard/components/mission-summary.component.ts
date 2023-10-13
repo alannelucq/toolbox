@@ -1,9 +1,9 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { TuiAvatarModule, TuiIslandModule } from "@taiga-ui/kit";
-import { Mission } from "../core/models/mission.model";
+import { Mission } from "../../../core/models/mission.model";
 
 @Component({
-  selector: 'toolbox-mission-summary-card',
+  selector: 'toolbox-mission-summary',
   template: `
       <tui-island [hoverable]="true" [class.selected]="selected" size="m">
           <div class="row">
@@ -44,7 +44,7 @@ import { Mission } from "../core/models/mission.model";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class MissionSummaryCardComponent {
+export class MissionSummaryComponent {
   @Input({required: true}) mission: Mission;
   @Input({transform: booleanAttribute}) selected = false;
 }

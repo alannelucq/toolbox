@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RevenuesChartComponent } from "./revenues-chart.component";
 import { TuiIslandModule } from "@taiga-ui/kit";
 import { MetricCardComponent } from "./metric-card.component";
@@ -10,8 +10,8 @@ import { CalendarComponent } from "./calendar.component";
   template: `
       <toolbox-revenues-chart/>
       <div class="cards">
-          <toolbox-metric-card label="Chiffre d'affaires" value="99 150€"/>
-          <toolbox-metric-card label="Jours facturés" value="218"/>
+          <toolbox-metric-card label="Chiffre d'affaires" value="-- €"/>
+          <toolbox-metric-card label="Jours facturés" value="--"/>
       </div>
       <toolbox-calendar/>
 
@@ -35,6 +35,7 @@ import { CalendarComponent } from "./calendar.component";
   ],
   standalone: true,
   imports: [RevenuesChartComponent, TuiIslandModule, MetricCardComponent, TuiCalendarModule, CalendarComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class MetricsComponent {

@@ -1,10 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { TuiIslandModule } from "@taiga-ui/kit";
 
 @Component({
   selector: 'toolbox-metric-card',
   template: `
-      <tui-island>
+      <tui-island [hoverable]="true">
           <p class="figure">{{ value }}</p>
           <p class="label">{{ label}}</p>
       </tui-island>
@@ -39,7 +39,8 @@ import { TuiIslandModule } from "@taiga-ui/kit";
     `
   ],
   imports: [TuiIslandModule],
-  standalone: true
+  standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class MetricCardComponent {

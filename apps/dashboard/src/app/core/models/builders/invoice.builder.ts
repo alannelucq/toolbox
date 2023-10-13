@@ -1,4 +1,5 @@
 import { Invoice } from "../invoice.model";
+import { on } from "@toolbox/helpers";
 
 export class InvoiceBuilder {
   protected id: string;
@@ -38,7 +39,7 @@ export class InvoiceBuilder {
 
 export class StubInvoiceBuilder extends InvoiceBuilder {
   override id = "invoice-id";
-  override month = new Date();
+  override month = on("01/10/2023");
   override workDaysCount = 20;
   override dailyRate = 500;
 }

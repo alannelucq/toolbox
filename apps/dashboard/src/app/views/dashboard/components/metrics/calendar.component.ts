@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { TuiCalendarModule } from "@taiga-ui/core";
 import { TuiIslandModule } from "@taiga-ui/kit";
 import { TuiBooleanHandler, TuiDay } from "@taiga-ui/cdk";
+import { isWeekEnd } from "@toolbox/helpers";
 
 
 @Component({
   selector: 'toolbox-calendar',
   template: `
-      <tui-island>
+      <tui-island [hoverable]="true">
           <tui-calendar [disabledItemHandler]="disableCalendarHandler"/>
       </tui-island>
   `,
@@ -24,9 +25,10 @@ import { TuiBooleanHandler, TuiDay } from "@taiga-ui/cdk";
   ],
   imports: [TuiCalendarModule, TuiIslandModule],
   standalone: true,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class CalendarComponent {
-  disableCalendarHandler: TuiBooleanHandler<TuiDay> = (day: TuiDay) => [0, 6].includes(new Date(day.year, day.month, day.day).getDay())
+  disableCalendarHandler: TuiBooleanHandler<TuiDay> = (day: TuiDay) => isWeekEnd(new Date(day.year, day.month, day.day))
 
 }

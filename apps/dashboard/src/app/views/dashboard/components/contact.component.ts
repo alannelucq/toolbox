@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Contact } from "../core/models/contact.model";
+import { Contact } from "../../../core/models/contact.model";
 import { TuiAvatarModule, TuiIslandModule } from "@taiga-ui/kit";
 import { TuiSvgModule } from "@taiga-ui/core";
 
@@ -40,8 +40,8 @@ import { TuiSvgModule } from "@taiga-ui/core";
     `
   ],
   standalone: true,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [TuiIslandModule, TuiAvatarModule, TuiSvgModule]
+  imports: [TuiIslandModule, TuiAvatarModule, TuiSvgModule],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class ContactCardComponent {

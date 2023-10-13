@@ -1,17 +1,22 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { TuiIslandModule } from "@taiga-ui/kit";
-import { StubMissionBuilder } from "../core/models/builders/mission.builder";
+import { StubMissionBuilder } from "../../../core/models/builders/mission.builder";
 import { ContactCardComponent } from "./contact.component";
 import { CurrencyPipe, DatePipe, NgForOf, TitleCasePipe } from "@angular/common";
+import { ContactBuilder } from "../../../core/models/builders/contact.builder";
+import { StubInvoiceBuilder } from "../../../core/models/builders/invoice.builder";
 
 @Component({
   selector: 'toolbox-mission-detail',
   template: `
-      <tui-island>
+      <tui-island [hoverable]="true">
           <p class="tui-island__category">Détail de la mission</p>
           <h2 class="tui-island__title">{{ mission().name }}</h2>
           <p class="tui-island__paragraph">{{ mission().description }}</p>
-          <toolbox-contact-card [contact]="mission().contact" class="tui-space_top-4 tui-space_bottom-7"/>
+          <toolbox-contact-card
+              [contact]="mission().contact"
+              class="tui-space_top-4 tui-space_bottom-7"
+          />
           <p class="tui-island__category tui-space_top-7 tui-space_bottom-0">Dernier TJM</p>
           <p class="tui-space_top-0">
               <span class="tui-island__title tui-space_top-0 daily-rate">
@@ -44,6 +49,16 @@ import { CurrencyPipe, DatePipe, NgForOf, TitleCasePipe } from "@angular/common"
 })
 
 export class MissionDetailComponent {
-  mission = signal(new StubMissionBuilder().build());
+  mission = signal(
+    new StubMissionBuilder()
+      .withId('XXX')
+      .withName('-- --')
+      .withContact(
+        new ContactBuilder().withId('--').withName('John Doe').withEmail('john.doe@mail.com').withPhone('-- -- -- -- --').build()
+      )
+      .withInvoices([new StubInvoiceBuilder().build()])
+      .withSkills(['--', '--', '--'])
+      .build()
+  );
   lastInvoice = signal(this.mission().invoices[this.mission().invoices.length - 1]);
 }
