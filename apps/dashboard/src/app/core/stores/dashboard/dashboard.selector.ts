@@ -41,4 +41,24 @@ export class DashboardSelector {
       }
     )
   }
+
+  static metrics() {
+    return createSelector(
+      [DashboardSelector.slices.missions],
+      (missions) => {
+        const invoices = missions
+          .flatMap(mission => mission.invoices)
+          .filter(invoice => invoice.month.getFullYear() === new Date().getFullYear());
+
+        const revenues = Array(12).fill(0);
+        invoices.forEach(invoice => revenues[invoice.month.getMonth()] += invoice.dailyRate * invoice.workDaysCount);
+
+        return {
+          totalWorkedDaysCount: invoices.reduce((dayCount, invoice) => dayCount + invoice.workDaysCount, 0),
+          totalRevenues: invoices.reduce((revenues, invoice) => revenues + (invoice.dailyRate * invoice.workDaysCount), 0),
+          revenues
+        }
+      }
+    );
+  }
 }

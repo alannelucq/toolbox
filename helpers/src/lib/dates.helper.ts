@@ -15,3 +15,7 @@ export function isWeekEnd(date: Date) {
   return dayjs(date).day() === 0 || dayjs(date).day() === 6;
 }
 
+export function addMonths(date: Date, month: number) {
+  return dayjs(date).add(month, "month").toDate();
+}
+

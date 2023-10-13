@@ -1,4 +1,4 @@
-import { isWeekEnd, on } from './dates.helper';
+import { addMonths, isWeekEnd, on } from './dates.helper';
 
 describe('Dates Helper', () => {
 
@@ -15,5 +15,9 @@ describe('Dates Helper', () => {
     expect(isWeekEnd(on("07/10/2023"))).toBe(true);
     expect(isWeekEnd(on("08/10/2023"))).toBe(true);
     expect(isWeekEnd(on("09/10/2023"))).toBe(false);
+  });
+
+  it('should add month', () => {
+    expect(addMonths(on("01/12/2022"), 1)).toEqual(on("01/01/2023"));
   });
 });

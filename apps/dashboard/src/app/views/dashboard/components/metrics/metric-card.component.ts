@@ -5,7 +5,7 @@ import { TuiIslandModule } from "@taiga-ui/kit";
   selector: 'toolbox-metric-card',
   template: `
       <tui-island [hoverable]="true">
-          <p class="figure">{{ value }}</p>
+          <p class="figure">{{ value ?? '--' }}</p>
           <p class="label">{{ label}}</p>
       </tui-island>
   `,
@@ -45,5 +45,5 @@ import { TuiIslandModule } from "@taiga-ui/kit";
 
 export class MetricCardComponent {
   @Input({required: true}) label: string;
-  @Input({required: true}) value: string | number;
+  @Input() value: string | number | null;
 }
