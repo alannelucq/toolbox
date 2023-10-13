@@ -3,8 +3,9 @@ import { MissionSummaryComponent } from "./components/mission-summary.component"
 import { NgForOf } from "@angular/common";
 import { MissionDetailComponent } from "./components/mission-detail.component";
 import { MetricsComponent } from "./components/metrics/metrics.component";
-import DashboardHandler from "../../core/handlers/dashboard.handler";
 import { toSignal } from "@angular/core/rxjs-interop";
+import { DashboardSelector } from "../../core/stores/dashboard/dashboard.selector";
+import { Store } from "@ngxs/store";
 
 @Component({
   selector: 'toolbox-dashboard',
@@ -42,7 +43,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
   imports: [MissionSummaryComponent, NgForOf, MissionDetailComponent, MetricsComponent],
   standalone: true
 })
-export class DashboardComponent {
-
-  missions = toSignal(inject(DashboardHandler).retrieveMissions())
+export default class DashboardComponent {
+  store = inject(Store);
+  missions = toSignal(this.store.select(DashboardSelector.summaries()));
 }

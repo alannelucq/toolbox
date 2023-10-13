@@ -1,7 +1,7 @@
 import { NgDompurifySanitizer } from "@tinkoff/ng-dompurify";
 import { TUI_SANITIZER, TuiAlertModule, TuiDialogModule, TuiRootModule } from "@taiga-ui/core";
 import { Component } from '@angular/core';
-import { DashboardComponent } from "./views/dashboard/dashboard.component";
+import DashboardComponent from "./views/dashboard/dashboard.component";
 
 @Component({
   standalone: true,
