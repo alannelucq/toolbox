@@ -73,4 +73,11 @@ export class DashboardSelector {
       }))
     );
   }
+
+  static loading() {
+    return createSelector(
+      [DashboardSelector.slices.loading],
+      loading => loading
+    );
+  }
 }

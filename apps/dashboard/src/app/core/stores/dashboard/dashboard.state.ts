@@ -7,14 +7,16 @@ import { tap } from "rxjs";
 
 export interface DashboardStateModel {
   missions: Mission[];
-  selectedMissionId: string | null
+  selectedMissionId: string | null,
+  loading: boolean
 }
 
 @State<DashboardStateModel>({
   name: 'dashboard',
   defaults: {
     missions: [],
-    selectedMissionId: null
+    selectedMissionId: null,
+    loading: false
   }
 })
 @Injectable()
@@ -41,6 +43,7 @@ export class DashboardState {
 
   @Action(SendInvoice)
   sendInvoice(ctx: StateContext<DashboardStateModel>, {invoice}: SendInvoice) {
+    ctx.patchState({loading: true});
     return this.dashboardGateway.sendInvoice(invoice).pipe(
       tap(response => ctx.dispatch(new InvoiceSent(response)))
     );
@@ -49,6 +52,6 @@ export class DashboardState {
   @Action(InvoiceSent)
   invoiceSent(ctx: StateContext<DashboardStateModel>, {response}: InvoiceSent) {
     const missions = ctx.getState().missions.map(mission => mission.id === response.missionId ? {...mission, invoices: [...mission.invoices, response.invoice]} : mission);
-    ctx.patchState({missions});
+    ctx.patchState({missions, loading: false});
   }
 }

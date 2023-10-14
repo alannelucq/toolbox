@@ -28,7 +28,6 @@ import { CurrencyPipe } from "@angular/common";
   styles: [
     `
         :host {
-            /*filter: blur(10px);*/
             padding: 24px;
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;

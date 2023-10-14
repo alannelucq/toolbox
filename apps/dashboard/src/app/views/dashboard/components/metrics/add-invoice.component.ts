@@ -31,7 +31,7 @@ import { switchMap, tap } from "rxjs";
               </tui-input-month>
               <tui-input-number formControlName="dailyRate">TJM</tui-input-number>
               <tui-input-number formControlName="workedDaysCount">Nombre de jours facturés</tui-input-number>
-              <button tuiButton type="submit">Envoyer la facture</button>
+              <button tuiButton type="submit" [showLoader]="loading()">Envoyer la facture</button>
           </form>
       </tui-island>
   `,
@@ -70,6 +70,7 @@ export class AddInvoiceComponent {
     month: new FormControl<TuiMonth | null>(null, Validators.required),
     workedDaysCount: new FormControl<number | null>(null, Validators.required),
   });
+  loading = toSignal(this.store.select(DashboardSelector.loading()), {initialValue: false});
   options = toSignal(this.store.select(DashboardSelector.invoiceOptions()), {initialValue: []});
   stringify: TuiStringHandler<InvoiceOption> = option => option.name;
 
