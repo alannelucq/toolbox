@@ -179,6 +179,15 @@
   dependencies:
     tslib "^2.3.0"
 
+"@angular/cdk@^16.2.8":
+  version "16.2.8"
+  resolved "https://registry.yarnpkg.com/@angular/cdk/-/cdk-16.2.8.tgz#c79059f544c5b4ee2a1056d3c47aa6ba2bb8732f"
+  integrity sha512-DvqxH909mgSSxWbc5xM5xKLjDMPXY3pzzSVAllngvc9KGPFw240WCs3tSpPaVJI50Esbzdu5O0CyTBfu9jUy4g==
+  dependencies:
+    tslib "^2.3.0"
+  optionalDependencies:
+    parse5 "^7.1.2"
+
 "@angular/cli@~16.2.0":
   version "16.2.5"
   resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-16.2.5.tgz#4da7c20d910c70c33a7816fb529131d88be8f581"
@@ -2748,6 +2757,13 @@
   dependencies:
     tslib ">=2.0.0"
 
+"@taiga-ui/addon-mobile@^3.48.0":
+  version "3.48.0"
+  resolved "https://registry.yarnpkg.com/@taiga-ui/addon-mobile/-/addon-mobile-3.48.0.tgz#11025b59f687cebd05a4dac1cf09f8991834cf58"
+  integrity sha512-XnSzUUPrCnt0BT41b/H6TXm2I0OI2TGM9sDJVfCPJMzddbL1R/axL7HZ6FnmPoyhzhqly3Dx3tWuZyYzkrFA/A==
+  dependencies:
+    tslib ">=2.0.0"
+
 "@taiga-ui/cdk@^3.47.0":
   version "3.47.0"
   resolved "https://registry.yarnpkg.com/@taiga-ui/cdk/-/cdk-3.47.0.tgz#b3e2828bc572ecf980ef736f1f6d2110460dc82e"
@@ -2775,6 +2791,13 @@
   version "3.47.0"
   resolved "https://registry.yarnpkg.com/@taiga-ui/i18n/-/i18n-3.47.0.tgz#59bb25d9cf002aa8226dd8ca5752e75f4d88cc3f"
   integrity sha512-41C+ZBm8+rSR5/8ODmBn14dr5Z5MLYTpadXeV7u+AnrfsGQ3hA4D/AeiFHMNhp8zdXnsndDh0m/smB7Vkf2k5w==
+  dependencies:
+    tslib ">=2.0.0"
+
+"@taiga-ui/i18n@^3.48.0":
+  version "3.48.0"
+  resolved "https://registry.yarnpkg.com/@taiga-ui/i18n/-/i18n-3.48.0.tgz#efbc0181f02feecffb2d8f30c62c800ebc204ead"
+  integrity sha512-igxfj3rrT5Hiu5r2hXPVm8NBlMlJ3gsYZP7/0bVvYCHOihf+SvFCaVAEAbkzf0jgUPxp8DkyCR9CWD2LGkGPXA==
   dependencies:
     tslib ">=2.0.0"
 
@@ -8666,7 +8689,7 @@ parse5@6.0.1:
   resolved "https://registry.yarnpkg.com/parse5/-/parse5-6.0.1.tgz#e1a1c085c569b3dc08321184f19a39cc27f7c30b"
   integrity sha512-Ofn/CTFzRGTTxwpNEs9PP93gXShHcTq255nzRYSKe8AkVpZY7e1fpmTfOyoIvjP5HG7Z2ZM7VS9PPhQGW2pOpw==
 
-parse5@^7.0.0, parse5@^7.1.1:
+parse5@^7.0.0, parse5@^7.1.1, parse5@^7.1.2:
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/parse5/-/parse5-7.1.2.tgz#0736bebbfd77793823240a23b7fc5e010b7f8e32"
   integrity sha512-Czj1WaSVpaoj0wbhMzLmWD69anp2WH7FXMB9n1Sy8/ZFF9jolSQVMu1Ij5WIyGmcBmhk7EOndpO4mIpihVqAXw==

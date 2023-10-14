@@ -10,6 +10,8 @@ import { DashboardState } from "./core/stores/dashboard/dashboard.state";
 import { DashboardGateway } from "./core/ports/dashboard.gateway";
 import { provideRouter, Routes } from "@angular/router";
 import { RetrieveMissions } from "./core/stores/dashboard/dashboard.action";
+import { TUI_FRENCH_LANGUAGE, TUI_LANGUAGE } from "@taiga-ui/i18n";
+import { of } from "rxjs";
 
 const routes: Routes = [
   {
@@ -28,8 +30,12 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     importProvidersFrom(
       NgxsModule.forRoot([DashboardState]),
-      TuiRootModule
+      TuiRootModule,
     ),
+    {
+      provide: TUI_LANGUAGE,
+      useValue: of(TUI_FRENCH_LANGUAGE),
+    },
     {provide: LOCALE_ID, useValue: 'fr'},
     {provide: DashboardGateway, useFactory: () => new InMemoryDashboardGateway().withMissions(MISSIONS)},
   ],

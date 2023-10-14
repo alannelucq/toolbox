@@ -31,7 +31,7 @@ export class InvoiceBuilder {
     return {
       id: this.id,
       month: this.month,
-      workDaysCount: this.workDaysCount,
+      workedDaysCount: this.workDaysCount,
       dailyRate: this.dailyRate,
     };
   }

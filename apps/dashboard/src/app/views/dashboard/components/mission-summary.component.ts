@@ -7,7 +7,7 @@ import { NgClass } from "@angular/common";
   selector: 'toolbox-mission-summary',
   template: `
       <tui-island [hoverable]="true" size="m" [class.selected]="mission.selected">
-          <div class="row">
+          <div class="flex">
               <tui-avatar size="m" [text]="mission.name" [rounded]="true"/>
               <div>
                   <h3 class="tui-island__title">{{ mission.name }}</h3>

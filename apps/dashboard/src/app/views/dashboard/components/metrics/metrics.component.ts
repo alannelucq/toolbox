@@ -3,7 +3,7 @@ import { RevenuesChartComponent } from "./revenues-chart.component";
 import { TuiIslandModule } from "@taiga-ui/kit";
 import { MetricCardComponent } from "./metric-card.component";
 import { TuiCalendarModule } from "@taiga-ui/core";
-import { CalendarComponent } from "./calendar.component";
+import { AddInvoiceComponent } from "./add-invoice.component";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { DashboardSelector } from "../../../../core/stores/dashboard/dashboard.selector";
 import { Store } from "@ngxs/store";
@@ -23,7 +23,7 @@ import { CurrencyPipe } from "@angular/common";
               [value]="metrics()?.totalWorkedDaysCount ?? '--'"
           />
       </div>
-      <toolbox-calendar/>
+      <toolbox-add-invoice/>
   `,
   styles: [
     `
@@ -43,7 +43,7 @@ import { CurrencyPipe } from "@angular/common";
     `
   ],
   standalone: true,
-  imports: [RevenuesChartComponent, TuiIslandModule, MetricCardComponent, TuiCalendarModule, CalendarComponent, CurrencyPipe],
+  imports: [RevenuesChartComponent, TuiIslandModule, MetricCardComponent, TuiCalendarModule, AddInvoiceComponent, CurrencyPipe],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 

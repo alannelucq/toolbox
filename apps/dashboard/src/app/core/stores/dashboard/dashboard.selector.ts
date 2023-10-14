@@ -52,14 +52,25 @@ export class DashboardSelector {
           .filter(invoice => invoice.month.getFullYear() === new Date().getFullYear());
 
         const revenues = Array(12).fill(0);
-        invoices.forEach(invoice => revenues[invoice.month.getMonth()] += invoice.dailyRate * invoice.workDaysCount);
+        invoices.forEach(invoice => revenues[invoice.month.getMonth()] += invoice.dailyRate * invoice.workedDaysCount);
 
         return {
-          totalWorkedDaysCount: invoices.reduce((dayCount, invoice) => dayCount + invoice.workDaysCount, 0),
-          totalRevenues: invoices.reduce((revenues, invoice) => revenues + (invoice.dailyRate * invoice.workDaysCount), 0),
+          totalWorkedDaysCount: invoices.reduce((dayCount, invoice) => dayCount + invoice.workedDaysCount, 0),
+          totalRevenues: invoices.reduce((revenues, invoice) => revenues + (invoice.dailyRate * invoice.workedDaysCount), 0),
           revenues
         }
       }
+    );
+  }
+
+  static invoiceOptions() {
+    return createSelector(
+      [DashboardSelector.slices.missions],
+      missions => missions.map(mission => ({
+        id: mission.id,
+        name: mission.name,
+        lastDailyRate: mission.invoices[mission.invoices.length - 1].dailyRate ?? null,
+      }))
     );
   }
 }

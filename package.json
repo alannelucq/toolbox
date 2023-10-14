@@ -6,6 +6,7 @@
   "private": true,
   "dependencies": {
     "@angular/animations": "~16.2.0",
+    "@angular/cdk": "^16.2.8",
     "@angular/common": "~16.2.0",
     "@angular/compiler": "~16.2.0",
     "@angular/core": "~16.2.0",
@@ -17,8 +18,10 @@
     "@ngxs/store": "^3.8.1",
     "@nx/angular": "16.10.0",
     "@taiga-ui/addon-charts": "^3.47.0",
+    "@taiga-ui/addon-mobile": "^3.48.0",
     "@taiga-ui/cdk": "^3.47.0",
     "@taiga-ui/core": "^3.47.0",
+    "@taiga-ui/i18n": "^3.48.0",
     "@taiga-ui/icons": "^3.47.0",
     "@taiga-ui/kit": "^3.47.0",
     "@taiga-ui/styles": "^3.47.0",

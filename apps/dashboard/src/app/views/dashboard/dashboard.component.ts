@@ -7,6 +7,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
 import { DashboardSelector } from "../../core/stores/dashboard/dashboard.selector";
 import { Store } from "@ngxs/store";
 import { SelectMission } from "../../core/stores/dashboard/dashboard.action";
+import { TuiButtonModule } from "@taiga-ui/core";
 
 @Component({
   selector: 'toolbox-dashboard',
@@ -28,7 +29,7 @@ import { SelectMission } from "../../core/stores/dashboard/dashboard.action";
         :host {
             height: 100%;
             display: grid;
-            grid-template-rows: 1fr 2fr;
+            grid-template-rows: 45% 55%;
         }
 
         .missions-grid {
@@ -45,7 +46,7 @@ import { SelectMission } from "../../core/stores/dashboard/dashboard.action";
         }
     `
   ],
-  imports: [MissionSummaryComponent, NgForOf, MissionDetailComponent, MetricsComponent],
+  imports: [MissionSummaryComponent, NgForOf, MissionDetailComponent, MetricsComponent, TuiButtonModule],
   standalone: true
 })
 export default class DashboardComponent {

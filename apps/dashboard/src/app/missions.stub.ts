@@ -16,7 +16,7 @@ const MISSION_COMPANY_A = new MissionBuilder()
       .withPhone('06 12 34 56 78')
       .build()
   )
-  .withSkills(['Angular', 'RxJS', 'TypeScript', 'Jest', 'Cypress'])
+  .withSkills(['Angular', 'RxJS', 'Cypress'])
   .withInvoices(generateInvoices({name: 'Stubby Company', workDaysCount: 20, dailyRate: 500, count: 3, begin: on('01/01/2023')}))
   .build();
 
@@ -33,7 +33,7 @@ const MISSION_COMPANY_B = new MissionBuilder()
       .withPhone('06 12 34 56 78')
       .build()
   )
-  .withSkills(['Angular', 'RxJS', 'TypeScript', 'NGXS', 'Jest'])
+  .withSkills(['Angular', 'RxJS', 'NGXS'])
   .withInvoices(generateInvoices({name: 'Fancy Company', workDaysCount: 20, dailyRate: 550, count: 4, begin: on('01/04/2023')}))
   .build();
 
@@ -50,7 +50,7 @@ const MISSION_COMPANY_C = new MissionBuilder()
       .withPhone('06 12 34 56 78')
       .build()
   )
-  .withSkills(['Angular', 'RxJS', 'TypeScript', 'Jest'])
+  .withSkills(['Angular', 'RxJS'])
   .withInvoices(generateInvoices({name: 'Big Bank Company', workDaysCount: 20, dailyRate: 800, count: 3, begin: on('01/08/2023')}))
   .build();
 
