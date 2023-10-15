@@ -1,7 +1,7 @@
 import { TestBed } from "@angular/core/testing";
 import { NgxsModule, Store } from "@ngxs/store";
 import { DashboardState, DashboardStateModel } from "./dashboard.state";
-import { RetrieveMissions, SelectMission, SendInvoice } from "./dashboard.action";
+import { MissionSelected, RetrieveMissions, SendInvoice } from "./dashboard.action";
 import { InMemoryDashboardGateway } from "../../../adapters/in-memory-dashboard.gateway";
 import { DashboardGateway } from "../../ports/dashboard.gateway";
 import { StubMissionBuilder } from "../../models/builders/mission.builder";
@@ -38,13 +38,13 @@ describe('DashboardState', () => {
   });
 
   it('should select mission', () => {
-    store.dispatch(new SelectMission("mission-id"));
+    store.dispatch(new MissionSelected("mission-id"));
     expect(store.snapshot().dashboard.selectedMissionId).toEqual("mission-id");
   });
 
   it('should unselect mission', () => {
     initStore({selectedMissionId: "mission-id"});
-    store.dispatch(new SelectMission("mission-id"));
+    store.dispatch(new MissionSelected("mission-id"));
     expect(store.snapshot().dashboard.selectedMissionId).toBeNull();
   });
 

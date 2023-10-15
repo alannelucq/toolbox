@@ -3,7 +3,7 @@ import { AddInvoiceResponse } from "../../models/add-invoice-response.model";
 import { Mission } from "../../models/mission.model";
 
 export class RetrieveMissions {
-  static readonly type = '[Dashboard] Retrieve missions';
+  static readonly type = '[Dashboard Page] Retrieve missions';
 }
 
 export class MissionRetrieved {
@@ -13,15 +13,15 @@ export class MissionRetrieved {
   }
 }
 
-export class SelectMission {
-  static readonly type = '[Dashboard] Select mission';
+export class MissionSelected {
+  static readonly type = '[Dashboard Page] Mission selected';
 
   constructor(public missionId: string) {
   }
 }
 
 export class SendInvoice {
-  static readonly type = '[Dashboard] Send invoice';
+  static readonly type = '[Dashboard Page] Send invoice';
 
   constructor(public invoice: AddInvoiceRequest) {
   }

@@ -1,7 +1,7 @@
 import { Mission } from "../../models/mission.model";
 import { Action, State, StateContext } from "@ngxs/store";
 import { inject, Injectable } from "@angular/core";
-import { InvoiceSent, MissionRetrieved, RetrieveMissions, SelectMission, SendInvoice } from "./dashboard.action";
+import { InvoiceSent, MissionRetrieved, MissionSelected, RetrieveMissions, SendInvoice } from "./dashboard.action";
 import { DashboardGateway } from "../../ports/dashboard.gateway";
 import { tap } from "rxjs";
 
@@ -35,8 +35,8 @@ export class DashboardState {
     ctx.patchState({missions});
   }
 
-  @Action(SelectMission)
-  selectMission(ctx: StateContext<DashboardStateModel>, {missionId}: SelectMission) {
+  @Action(MissionSelected)
+  selectMission(ctx: StateContext<DashboardStateModel>, {missionId}: MissionSelected) {
     const isSameMission = ctx.getState().selectedMissionId === missionId;
     ctx.patchState({selectedMissionId: isSameMission ? null : missionId});
   }

@@ -6,7 +6,7 @@ import { MetricsComponent } from "./components/metrics/metrics.component";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { DashboardSelector } from "../../core/stores/dashboard/dashboard.selector";
 import { Store } from "@ngxs/store";
-import { SelectMission } from "../../core/stores/dashboard/dashboard.action";
+import { MissionSelected } from "../../core/stores/dashboard/dashboard.action";
 import { TuiButtonModule } from "@taiga-ui/core";
 
 @Component({
@@ -57,6 +57,6 @@ export default class DashboardComponent {
     {initialValue: null}
   );
   selectMission(missionId: string) {
-    this.store.dispatch(new SelectMission(missionId));
+    this.store.dispatch(new MissionSelected(missionId));
   }
 }

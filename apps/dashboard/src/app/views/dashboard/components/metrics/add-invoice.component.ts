@@ -77,11 +77,11 @@ export class AddInvoiceComponent {
   constructor() {
     this.actions$.pipe(
       ofActionSuccessful(InvoiceSent),
+      tap(() => this.form.reset()),
       switchMap(payload => this.alertService.open(
         `Vous venez d'envoyer une facture de ${payload.response.invoice.dailyRate * payload.response.invoice.workedDaysCount} € `,
         {status: 'success', label: 'Facture envoyée !'})
       ),
-      tap(() => this.form.reset()),
       takeUntilDestroyed()
     ).subscribe()
   }
