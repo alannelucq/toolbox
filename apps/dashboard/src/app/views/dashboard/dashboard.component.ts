@@ -3,8 +3,8 @@ import { MissionSummaryComponent } from "./components/mission-summary.component"
 import { NgForOf } from "@angular/common";
 import { MissionDetailComponent } from "./components/mission-detail.component";
 import { MetricsComponent } from "./components/metrics/metrics.component";
-import DashboardHandler from "../../core/handlers/dashboard.handler";
 import { toSignal } from "@angular/core/rxjs-interop";
+import { DashboardGateway } from "../../core/ports/dashboard.gateway";
 
 @Component({
   selector: 'toolbox-dashboard',
@@ -22,7 +22,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
         :host {
             height: 100%;
             display: grid;
-            grid-template-rows: 1fr 2fr;
+            grid-template-rows: 45% 55%;
         }
 
         .missions-grid {
@@ -44,5 +44,5 @@ import { toSignal } from "@angular/core/rxjs-interop";
 })
 export class DashboardComponent {
 
-  missions = toSignal(inject(DashboardHandler).retrieveMissions())
+  missions = toSignal(inject(DashboardGateway).retrieveMissions())
 }

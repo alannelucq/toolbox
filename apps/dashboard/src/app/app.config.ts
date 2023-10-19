@@ -3,9 +3,9 @@ import { ApplicationConfig, importProvidersFrom, LOCALE_ID } from '@angular/core
 import { provideAnimations } from "@angular/platform-browser/animations";
 import localeFr from '@angular/common/locales/fr';
 import { registerLocaleData } from "@angular/common";
-import DashboardHandler from "./core/handlers/dashboard.handler";
-import { InMemoryDashboardGateway } from "./adapters/in-memory-dashboard.gateway";
+import { InMemoryDashboardGateway } from "./core/adapters/in-memory-dashboard.gateway";
 import { MISSIONS } from "./missions.stub";
+import { DashboardGateway } from "./core/ports/dashboard.gateway";
 
 
 registerLocaleData(localeFr, 'fr');
@@ -14,6 +14,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     importProvidersFrom(TuiRootModule),
     {provide: LOCALE_ID, useValue: 'fr'},
-    {provide: DashboardHandler, useValue: new DashboardHandler(new InMemoryDashboardGateway().withMissions(MISSIONS))},
+    {provide: DashboardGateway, useFactory: () => new InMemoryDashboardGateway().withMissions(MISSIONS)},
   ],
 };

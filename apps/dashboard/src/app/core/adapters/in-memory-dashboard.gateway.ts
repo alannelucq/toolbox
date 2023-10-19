@@ -1,6 +1,6 @@
-import { DashboardGateway } from "../core/ports/dashboard.gateway";
+import { DashboardGateway } from "../ports/dashboard.gateway";
 import { BehaviorSubject, Observable } from "rxjs";
-import { Mission } from "../core/models/mission.model";
+import { Mission } from "../models/mission.model";
 
 export class InMemoryDashboardGateway extends DashboardGateway {
   missions$$ = new BehaviorSubject<Mission[]>([]);

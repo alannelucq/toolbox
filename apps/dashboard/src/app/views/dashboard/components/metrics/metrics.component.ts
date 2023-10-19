@@ -3,7 +3,7 @@ import { RevenuesChartComponent } from "./revenues-chart.component";
 import { TuiIslandModule } from "@taiga-ui/kit";
 import { MetricCardComponent } from "./metric-card.component";
 import { TuiCalendarModule } from "@taiga-ui/core";
-import { CalendarComponent } from "./calendar.component";
+import { InvoiceFormComponent } from "./invoice-form.component";
 
 @Component({
   selector: 'toolbox-metrics',
@@ -13,13 +13,12 @@ import { CalendarComponent } from "./calendar.component";
           <toolbox-metric-card label="Chiffre d'affaires" value="-- €"/>
           <toolbox-metric-card label="Jours facturés" value="--"/>
       </div>
-      <toolbox-calendar/>
+      <toolbox-invoice-form/>
 
   `,
   styles: [
     `
         :host {
-            filter: blur(10px);
             padding: 24px;
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
@@ -34,7 +33,7 @@ import { CalendarComponent } from "./calendar.component";
     `
   ],
   standalone: true,
-  imports: [RevenuesChartComponent, TuiIslandModule, MetricCardComponent, TuiCalendarModule, CalendarComponent],
+  imports: [RevenuesChartComponent, TuiIslandModule, MetricCardComponent, TuiCalendarModule, InvoiceFormComponent],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
