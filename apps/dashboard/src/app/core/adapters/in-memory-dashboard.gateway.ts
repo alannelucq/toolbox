@@ -1,16 +1,16 @@
 import { DashboardGateway } from "../ports/dashboard.gateway";
-import { BehaviorSubject, Observable } from "rxjs";
+import { Observable, of } from "rxjs";
 import { Mission } from "../models/mission.model";
 
 export class InMemoryDashboardGateway extends DashboardGateway {
-  missions$$ = new BehaviorSubject<Mission[]>([]);
+  missions: Mission[] = [];
 
   withMissions(missions: Mission[]): InMemoryDashboardGateway {
-    this.missions$$.next(missions);
+    this.missions = missions;
     return this;
   }
 
   override retrieveMissions(): Observable<Mission[]> {
-    return this.missions$$.asObservable();
+    return of(this.missions);
   }
 }
