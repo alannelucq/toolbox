@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { TuiAxesModule, TuiBarChartModule } from "@taiga-ui/addon-charts";
 import { TuiHintModule } from "@taiga-ui/core";
 import { TuiIslandModule } from "@taiga-ui/kit";
@@ -9,13 +9,13 @@ import { TuiIslandModule } from "@taiga-ui/kit";
       <tui-island [hoverable]="true">
           <tui-axes
               [axisXLabels]="['Janv.', 'Fév.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.']"
-              [axisYLabels]="['0', '2 500€', '5 000€', '7 500€', '10 000€', '12 500€', '15 000€']"
-              [horizontalLines]="6"
+              [axisYLabels]="axisYLabels()"
+              [horizontalLines]="horizontalLines()"
               [verticalLines]="12"
           >
               <tui-bar-chart
-                  [value]="revenues()"
-                  [max]="maxValue()"
+                  [value]="[values()]"
+                  [max]="max()"
               />
           </tui-axes>
       </tui-island>
@@ -42,6 +42,11 @@ import { TuiIslandModule } from "@taiga-ui/kit";
 })
 
 export class RevenuesChartComponent {
-  readonly revenues = signal([[5000, 6000, 7500, 5000, 12500, 7500, 5000, 7350, 7350, 7350, 10050, 12550]]);
-  readonly maxValue = signal(Math.max(...this.revenues()[0]) + 2500);
+  readonly values = signal([5000, 6000, 7500, 5000, 12500, 7500, 5000, 7350, 7350, 7350, 10050, 12550]);
+  readonly max = computed(() => Math.max(...this.values()) + 1000);
+  readonly horizontalLines = computed(() => Math.round(this.max() / 2500));
+  readonly axisYLabels = computed(() => Array.from(
+    {length: this.horizontalLines() + 1},
+    (_, i) => `${i * 2500} €`)
+  );
 }
