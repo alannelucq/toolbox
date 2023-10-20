@@ -6,13 +6,17 @@ import { registerLocaleData } from "@angular/common";
 import { InMemoryDashboardGateway } from "./core/adapters/in-memory-dashboard.gateway";
 import { MISSIONS } from "./missions.stub";
 import { DashboardGateway } from "./core/ports/dashboard.gateway";
+import { NgxsModule } from "@ngxs/store";
 
 
 registerLocaleData(localeFr, 'fr');
 export const appConfig: ApplicationConfig = {
   providers: [
     provideAnimations(),
-    importProvidersFrom(TuiRootModule),
+    importProvidersFrom(
+      NgxsModule.forRoot([]),
+      TuiRootModule
+    ),
     {provide: LOCALE_ID, useValue: 'fr'},
     {provide: DashboardGateway, useFactory: () => new InMemoryDashboardGateway().withMissions(MISSIONS)},
   ],
