@@ -84,26 +84,14 @@ describe('Dashboard Selectors', () => {
         .withId('id-fancy-company')
         .withName('Fancy Company')
         .withInvoices(
-          generateInvoices({
-            name: 'Fancy Company',
-            workDaysCount: 20,
-            dailyRate: 500,
-            count: 3,
-            begin: on('01/12/2022')
-          })
+          generateInvoices({name: 'Fancy Company', workDaysCount: 20, dailyRate: 500, count: 3, begin: on('01/12/2022')})
         )
         .build(),
       new StubMissionBuilder()
         .withId('id-super-company')
         .withName('Super Company')
         .withInvoices(
-          generateInvoices({
-            name: 'Super Company',
-            workDaysCount: 20,
-            dailyRate: 500,
-            count: 1,
-            begin: on('01/03/2023')
-          })
+          generateInvoices({name: 'Super Company', workDaysCount: 20, dailyRate: 500, count: 1, begin: on('01/03/2023')})
         )
         .build()
     ];
@@ -124,26 +112,14 @@ describe('Dashboard Selectors', () => {
         .withId('id-fancy-company')
         .withName('Fancy Company')
         .withInvoices(
-          generateInvoices({
-            name: 'Fancy Company',
-            workDaysCount: 20,
-            dailyRate: 500,
-            count: 3,
-            begin: on('01/12/2022')
-          })
+          generateInvoices({name: 'Fancy Company', workDaysCount: 20, dailyRate: 500, count: 3, begin: on('01/12/2022')})
         )
         .build(),
       new StubMissionBuilder()
         .withId('id-super-company')
         .withName('Super Company')
         .withInvoices(
-          generateInvoices({
-            name: 'Super Company',
-            workDaysCount: 20,
-            dailyRate: 500,
-            count: 1,
-            begin: on('01/03/2023')
-          })
+          generateInvoices({name: 'Super Company', workDaysCount: 20, dailyRate: 500, count: 1, begin: on('01/03/2023')})
         )
         .build()
     ];
