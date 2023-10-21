@@ -40,7 +40,7 @@ interface AddInvoiceFormModel {
               <tui-input-number name="workedDaysCount" [ngModel]="formValue().workedDaysCount">
                   Nombre de jours facturés
               </tui-input-number>
-              <button tuiButton type="submit">Envoyer la facture</button>
+              <button tuiButton type="submit" [showLoader]="loading()">Envoyer la facture</button>
           </form>
       </tui-island>
   `,
@@ -77,7 +77,7 @@ export class InvoiceFormComponent {
   isFormValid = computed(
     () => this.formValue().mission && this.formValue().month && this.formValue().workedDaysCount && this.formValue().dailyRate
   );
-
+  loading = toSignal(this.store.select(DashboardSelectors.slices.loading), {initialValue: false});
   options = toSignal(this.store.select(DashboardSelectors.invoiceOptions()), {initialValue: [] as InvoiceOption[]});
   stringify: TuiStringHandler<InvoiceOption> = option => option.name;
   invoiceSent = toSignal(

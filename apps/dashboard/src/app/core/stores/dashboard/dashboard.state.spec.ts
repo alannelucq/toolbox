@@ -29,7 +29,8 @@ describe('DashboardState', () => {
   it('should have default values', () => {
     expect(store.snapshot().dashboard).toEqual({
       missions: [],
-      selectedMissionId: null
+      selectedMissionId: null,
+      loading: false
     })
   });
 
