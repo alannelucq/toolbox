@@ -10,3 +10,10 @@ export class MissionsRetrieved {
   constructor(public missions: Mission[]) {
   }
 }
+
+export class MissionSelected {
+  static readonly type = "[Dashboard Page] Mission selected";
+
+  constructor(public missionId: string) {
+  }
+}

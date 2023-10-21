@@ -5,7 +5,7 @@ import { MissionSummary } from "../../../core/models/mission-summary.model";
 @Component({
   selector: 'toolbox-mission-summary',
   template: `
-      <tui-island [hoverable]="true" size="m">
+      <tui-island [hoverable]="true" size="m" [class.selected]="mission.selected">
           <div class="row">
               <tui-avatar size="m" [text]="mission.name" [rounded]="true"/>
               <div>

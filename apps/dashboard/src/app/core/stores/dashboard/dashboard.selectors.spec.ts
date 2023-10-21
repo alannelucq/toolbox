@@ -11,9 +11,10 @@ describe('Dashboard Selectors', () => {
         .withRole("Lead dev")
         .build()
     ];
+    const selectedMissionId = "mission-id";
 
-    expect(DashboardSelectors.summaries()(missions)).toEqual([
-      {id: "mission-id", title: "Fancy Company", role: "Lead dev"}
+    expect(DashboardSelectors.summaries()(missions, selectedMissionId)).toEqual([
+      {id: "mission-id", name: "Fancy Company", role: "Lead dev", selected: true}
     ]);
   });
 });
