@@ -1,6 +1,6 @@
 import { booleanAttribute, ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { TuiAvatarModule, TuiIslandModule } from "@taiga-ui/kit";
-import { Mission } from "../../../core/models/mission.model";
+import { MissionSummary } from "../../../core/models/mission-summary.model";
 
 @Component({
   selector: 'toolbox-mission-summary',
@@ -45,6 +45,6 @@ import { Mission } from "../../../core/models/mission.model";
 })
 
 export class MissionSummaryComponent {
-  @Input({required: true}) mission: Mission;
+  @Input({required: true}) mission: MissionSummary;
   @Input({transform: booleanAttribute}) selected = false;
 }
