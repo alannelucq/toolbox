@@ -1,14 +1,15 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
-import { TuiButtonModule } from "@taiga-ui/core";
+import { TuiAlertService, TuiButtonModule } from "@taiga-ui/core";
 import { TuiInputMonthModule, TuiInputNumberModule, TuiIslandModule, TuiSelectModule } from "@taiga-ui/kit";
 import { TuiMonth, TuiStringHandler, TuiValueChangesModule } from "@taiga-ui/cdk";
 import { FormsModule } from "@angular/forms";
 import { InvoiceOption } from "../../../../core/models/invoice-option.model";
 import { FormDirective } from "../../../../shared/directives/form.directive";
-import { Store } from "@ngxs/store";
+import { Actions, ofActionSuccessful, Store } from "@ngxs/store";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { DashboardSelectors } from "../../../../core/stores/dashboard/dashboard.selectors";
-import { SendInvoice } from "../../../../core/stores/dashboard/dashboard.actions";
+import { InvoiceSent, SendInvoice } from "../../../../core/stores/dashboard/dashboard.actions";
+import { switchMap, tap } from "rxjs";
 
 interface AddInvoiceFormModel {
   mission: InvoiceOption;
@@ -69,6 +70,8 @@ interface AddInvoiceFormModel {
 
 export class InvoiceFormComponent {
   private store = inject(Store);
+  private actions$ = inject(Actions);
+  private alertService = inject(TuiAlertService);
 
   formValue = signal<AddInvoiceFormModel>({} as AddInvoiceFormModel);
   isFormValid = computed(
@@ -77,6 +80,16 @@ export class InvoiceFormComponent {
 
   options = toSignal(this.store.select(DashboardSelectors.invoiceOptions()), {initialValue: [] as InvoiceOption[]});
   stringify: TuiStringHandler<InvoiceOption> = option => option.name;
+  invoiceSent = toSignal(
+    this.actions$.pipe(
+      ofActionSuccessful(InvoiceSent),
+      tap(() => this.formValue.set({} as AddInvoiceFormModel)),
+      switchMap(payload => this.alertService.open(
+        `Vous venez d'envoyer une facture de ${payload.response.invoice.dailyRate * payload.response.invoice.workDaysCount} € `,
+        {status: 'success', label: 'Facture envoyée !'}
+      ))
+    )
+  );
 
   computeDailyRate(option: InvoiceOption) {
     if (!option) return;
