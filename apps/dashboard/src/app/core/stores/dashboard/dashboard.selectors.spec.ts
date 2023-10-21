@@ -76,27 +76,83 @@ describe('Dashboard Selectors', () => {
     });
   });
 
-  it('should compute metrics', () => {
+  it('should aggregate metrics', () => {
     withToday(on("21/10/2023"));
 
     const missions = [
       new StubMissionBuilder()
+        .withId('id-fancy-company')
+        .withName('Fancy Company')
         .withInvoices(
           generateInvoices({
-            name: 'Stubby Company',
+            name: 'Fancy Company',
             workDaysCount: 20,
             dailyRate: 500,
-            count: 4,
+            count: 3,
             begin: on('01/12/2022')
+          })
+        )
+        .build(),
+      new StubMissionBuilder()
+        .withId('id-super-company')
+        .withName('Super Company')
+        .withInvoices(
+          generateInvoices({
+            name: 'Super Company',
+            workDaysCount: 20,
+            dailyRate: 500,
+            count: 1,
+            begin: on('01/03/2023')
           })
         )
         .build()
     ];
 
-    expect(DashboardSelectors.metrics()(missions)).toEqual({
+    const selectedMissionId = null;
+    expect(DashboardSelectors.metrics()(missions, selectedMissionId)).toEqual({
       totalWorkedDays: 60,
       totalRevenues: 30_000,
       revenues: [10_000, 10_000, 10_000, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    });
+  });
+
+  it('should retrieve metrics from selected mission only', () => {
+    withToday(on("21/10/2023"));
+
+    const missions = [
+      new StubMissionBuilder()
+        .withId('id-fancy-company')
+        .withName('Fancy Company')
+        .withInvoices(
+          generateInvoices({
+            name: 'Fancy Company',
+            workDaysCount: 20,
+            dailyRate: 500,
+            count: 3,
+            begin: on('01/12/2022')
+          })
+        )
+        .build(),
+      new StubMissionBuilder()
+        .withId('id-super-company')
+        .withName('Super Company')
+        .withInvoices(
+          generateInvoices({
+            name: 'Super Company',
+            workDaysCount: 20,
+            dailyRate: 500,
+            count: 1,
+            begin: on('01/03/2023')
+          })
+        )
+        .build()
+    ];
+
+    const selectedMissionId = 'id-fancy-company';
+    expect(DashboardSelectors.metrics()(missions, selectedMissionId)).toEqual({
+      totalWorkedDays: 40,
+      totalRevenues: 20_000,
+      revenues: [10_000, 10_000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     });
   });
 });

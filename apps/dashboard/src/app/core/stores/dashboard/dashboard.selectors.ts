@@ -45,9 +45,10 @@ export class DashboardSelectors {
 
   static metrics() {
     return createSelector(
-      [DashboardSelectors.slices.missions],
-      missions => {
+      [DashboardSelectors.slices.missions, DashboardSelectors.slices.selectedMissionId],
+      (missions, selectedMissionId) => {
         const invoices = missions
+          .filter(mission => !selectedMissionId || mission.id === selectedMissionId)
           .flatMap(mission => mission.invoices)
           .filter(invoice => invoice.month.getFullYear() === new Date().getFullYear());
 
