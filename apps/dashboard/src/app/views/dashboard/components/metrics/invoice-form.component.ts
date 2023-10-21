@@ -8,6 +8,7 @@ import { FormDirective } from "../../../../shared/directives/form.directive";
 import { Store } from "@ngxs/store";
 import { toSignal } from "@angular/core/rxjs-interop";
 import { DashboardSelectors } from "../../../../core/stores/dashboard/dashboard.selectors";
+import { SendInvoice } from "../../../../core/stores/dashboard/dashboard.actions";
 
 interface AddInvoiceFormModel {
   mission: InvoiceOption;
@@ -91,6 +92,7 @@ export class InvoiceFormComponent {
       month: month.toLocalNativeDate(),
       workedDaysCount
     }
-    // TODO : Dispatch an action to send invoice
+
+    this.store.dispatch(new SendInvoice(invoice));
   }
 }
