@@ -3,6 +3,7 @@ import { DashboardSelectors } from "./dashboard.selectors";
 import { StubContactBuilder } from "../../models/builders/contact.builder";
 import { InvoiceBuilder } from "../../models/builders/invoice.builder";
 import { on } from "@toolbox/helpers";
+import { generateInvoices } from "../../helpers/invoices.helpers";
 
 describe('Dashboard Selectors', () => {
 
@@ -74,4 +75,32 @@ describe('Dashboard Selectors', () => {
       }
     });
   });
+
+  it('should compute metrics', () => {
+    withToday(on("21/10/2023"));
+
+    const missions = [
+      new StubMissionBuilder()
+        .withInvoices(
+          generateInvoices({
+            name: 'Stubby Company',
+            workDaysCount: 20,
+            dailyRate: 500,
+            count: 4,
+            begin: on('01/12/2022')
+          })
+        )
+        .build()
+    ];
+
+    expect(DashboardSelectors.metrics()(missions)).toEqual({
+      totalWorkedDays: 60,
+      totalRevenues: 30_000,
+      revenues: [10_000, 10_000, 10_000, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    });
+  });
 });
+
+function withToday(date: Date) {
+  jest.useFakeTimers().setSystemTime(date);
+}

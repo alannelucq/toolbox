@@ -42,4 +42,24 @@ export class DashboardSelectors {
       }
     )
   }
+
+  static metrics() {
+    return createSelector(
+      [DashboardSelectors.slices.missions],
+      missions => {
+        const invoices = missions
+          .flatMap(mission => mission.invoices)
+          .filter(invoice => invoice.month.getFullYear() === new Date().getFullYear());
+
+        const revenues = Array(12).fill(0);
+        invoices.forEach(invoice => revenues[invoice.month.getMonth()] += invoice.dailyRate * invoice.workDaysCount);
+
+        return {
+          totalWorkedDays: invoices.reduce((count, invoice) => count + invoice.workDaysCount, 0),
+          totalRevenues: invoices.reduce((count, invoice) => count + invoice.dailyRate * invoice.workDaysCount, 0),
+          revenues
+        }
+      }
+    );
+  }
 }

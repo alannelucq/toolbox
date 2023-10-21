@@ -1,7 +1,7 @@
 import { MissionBuilder } from "./core/models/builders/mission.builder";
 import { ContactBuilder } from "./core/models/builders/contact.builder";
-import { InvoiceBuilder } from "./core/models/builders/invoice.builder";
 import { on } from "@toolbox/helpers";
+import { generateInvoices } from "./core/helpers/invoices.helpers";
 
 const MISSION_COMPANY_A = new MissionBuilder()
   .withId('mission-company-a-id')
@@ -17,7 +17,13 @@ const MISSION_COMPANY_A = new MissionBuilder()
       .build()
   )
   .withSkills(['Angular', 'RxJS', 'TypeScript'])
-  .withInvoices(generateInvoices({name: 'Stubby Company', dailyRate: 500, count: 3, begin: on('01/01/2021')}))
+  .withInvoices(generateInvoices({
+    name: 'Stubby Company',
+    workDaysCount: 20,
+    dailyRate: 500,
+    count: 3,
+    begin: on('01/01/2023')
+  }))
   .build();
 
 const MISSION_COMPANY_B = new MissionBuilder()
@@ -34,7 +40,13 @@ const MISSION_COMPANY_B = new MissionBuilder()
       .build()
   )
   .withSkills(['Angular', 'TypeScript', 'NGXS'])
-  .withInvoices(generateInvoices({name: 'Fancy Company', dailyRate: 550, count: 4, begin: on('01/04/2021')}))
+  .withInvoices(generateInvoices({
+    name: 'Fancy Company',
+    workDaysCount: 20,
+    dailyRate: 550,
+    count: 4,
+    begin: on('01/04/2023')
+  }))
   .build();
 
 const MISSION_COMPANY_C = new MissionBuilder()
@@ -51,20 +63,13 @@ const MISSION_COMPANY_C = new MissionBuilder()
       .build()
   )
   .withSkills(['Angular', 'RxJS', 'Jest'])
-  .withInvoices(generateInvoices({name: 'Big Bank Company', dailyRate: 800, count: 6, begin: on('01/08/2021')}))
+  .withInvoices(generateInvoices({
+    name: 'Big Bank Company',
+    workDaysCount: 20,
+    dailyRate: 800,
+    count: 3,
+    begin: on('01/08/2023')
+  }))
   .build();
-
-
-function generateInvoices(options: { name: string, dailyRate: number, count: number, begin: Date }) {
-  const {name, dailyRate, count, begin} = options;
-  return Array.from({length: count}, (_, i) => {
-    return new InvoiceBuilder()
-      .withId(`invoice-${name}-${i}`)
-      .withMonth(on(`01/${String(begin.getMonth() + 1 + i).padStart(2, '0')}/2023`))
-      .withDailyRate(dailyRate)
-      .withWorkDaysCount(18)
-      .build();
-  });
-}
 
 export const MISSIONS = [MISSION_COMPANY_A, MISSION_COMPANY_B, MISSION_COMPANY_C];
