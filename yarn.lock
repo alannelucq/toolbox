@@ -2778,6 +2778,13 @@
   dependencies:
     tslib ">=2.0.0"
 
+"@taiga-ui/i18n@^3.49.1":
+  version "3.49.1"
+  resolved "https://registry.yarnpkg.com/@taiga-ui/i18n/-/i18n-3.49.1.tgz#588889bcccfe02f9ca9e3ff4664ec4315d03c17b"
+  integrity sha512-x85DI7iuMUlKbvH+M/kuyYT7jmaV2ILxFXeCjrLs93iHilLisF3o9Zz+z+2pKgyjkBdnx0t2M3Bme2J3N6mXYA==
+  dependencies:
+    tslib ">=2.0.0"
+
 "@taiga-ui/icons@^3.47.0":
   version "3.47.0"
   resolved "https://registry.yarnpkg.com/@taiga-ui/icons/-/icons-3.47.0.tgz#59724391a5ff8d856ced44eb4ae157f6c9331355"
