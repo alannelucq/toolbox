@@ -1,5 +1,8 @@
-import { StubMissionBuilder } from "../../models/builders/mission.builder";
+import { MissionBuilder, StubMissionBuilder } from "../../models/builders/mission.builder";
 import { DashboardSelectors } from "./dashboard.selectors";
+import { StubContactBuilder } from "../../models/builders/contact.builder";
+import { InvoiceBuilder } from "../../models/builders/invoice.builder";
+import { on } from "@toolbox/helpers";
 
 describe('Dashboard Selectors', () => {
 
@@ -16,5 +19,59 @@ describe('Dashboard Selectors', () => {
     expect(DashboardSelectors.summaries()(missions, selectedMissionId)).toEqual([
       {id: "mission-id", name: "Fancy Company", role: "Lead dev", selected: true}
     ]);
+  });
+
+  it('should not have selected detail', () => {
+    const missions = [new StubMissionBuilder().build()];
+    const selectedMissionId = null;
+    expect(DashboardSelectors.selectedMissionDetail()(missions, selectedMissionId)).toBe(null);
+  });
+
+  it('should have selected detail', () => {
+    const missions = [
+      new MissionBuilder()
+        .withId('id-fancy-company')
+        .withDescription('Une super mission')
+        .withName('Fancy Company')
+        .withRole('Lead dev Front-end')
+        .withSkills(['Angular', 'TypeScript', 'RxJS'])
+        .withContact(
+          new StubContactBuilder()
+            .withName('John Doe')
+            .withEmail('john.doe@mail.com')
+            .withPhone('06 10 20 30 40')
+            .build()
+        )
+        .withInvoices([
+          new InvoiceBuilder()
+            .withId('invoice-1')
+            .withDailyRate(400)
+            .withMonth(on("01/09/2020"))
+            .withWorkDaysCount(20)
+            .build(),
+          new InvoiceBuilder()
+            .withId('invoice-2')
+            .withDailyRate(500)
+            .withMonth(on("01/10/2020"))
+            .withWorkDaysCount(10)
+            .build()
+        ])
+        .build()
+    ];
+    const selectedMissionId = 'id-fancy-company';
+    expect(DashboardSelectors.selectedMissionDetail()(missions, selectedMissionId)).toEqual({
+      name: 'Fancy Company',
+      description: 'Une super mission',
+      skills: ['Angular', 'TypeScript', 'RxJS'],
+      lastInvoice: {
+        dailyRate: 500,
+        month: on("01/10/2020")
+      },
+      contact: {
+        name: 'John Doe',
+        email: 'john.doe@mail.com',
+        phone: '06 10 20 30 40'
+      }
+    });
   });
 });
