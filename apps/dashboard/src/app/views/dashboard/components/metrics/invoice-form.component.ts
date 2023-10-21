@@ -1,10 +1,13 @@
-import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { TuiButtonModule } from "@taiga-ui/core";
 import { TuiInputMonthModule, TuiInputNumberModule, TuiIslandModule, TuiSelectModule } from "@taiga-ui/kit";
 import { TuiMonth, TuiStringHandler, TuiValueChangesModule } from "@taiga-ui/cdk";
 import { FormsModule } from "@angular/forms";
 import { InvoiceOption } from "../../../../core/models/invoice-option.model";
 import { FormDirective } from "../../../../shared/directives/form.directive";
+import { Store } from "@ngxs/store";
+import { toSignal } from "@angular/core/rxjs-interop";
+import { DashboardSelectors } from "../../../../core/stores/dashboard/dashboard.selectors";
 
 interface AddInvoiceFormModel {
   mission: InvoiceOption;
@@ -64,16 +67,14 @@ interface AddInvoiceFormModel {
 })
 
 export class InvoiceFormComponent {
+  private store = inject(Store);
+
   formValue = signal<AddInvoiceFormModel>({} as AddInvoiceFormModel);
   isFormValid = computed(
     () => this.formValue().mission && this.formValue().month && this.formValue().workedDaysCount && this.formValue().dailyRate
   );
 
-  options = signal([
-    {id: 'mission-1', name: 'Mission 1', lastDailyRate: 500},
-    {id: 'mission-2', name: 'Mission 2', lastDailyRate: 600},
-    {id: 'mission-3', name: 'Mission 3', lastDailyRate: 700},
-  ] as InvoiceOption[]);
+  options = toSignal(this.store.select(DashboardSelectors.invoiceOptions()), {initialValue: [] as InvoiceOption[]});
   stringify: TuiStringHandler<InvoiceOption> = option => option.name;
 
   computeDailyRate(option: InvoiceOption) {

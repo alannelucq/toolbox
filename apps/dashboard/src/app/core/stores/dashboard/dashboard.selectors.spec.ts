@@ -118,9 +118,7 @@ describe('Dashboard Selectors', () => {
       new StubMissionBuilder()
         .withId('id-super-company')
         .withName('Super Company')
-        .withInvoices(
-          generateInvoices({name: 'Super Company', workDaysCount: 20, dailyRate: 500, count: 1, begin: on('01/03/2023')})
-        )
+        .withInvoices(generateInvoices({name: 'Super Company', workDaysCount: 20, dailyRate: 500, count: 1, begin: on('01/03/2023')}))
         .build()
     ];
 
@@ -130,6 +128,26 @@ describe('Dashboard Selectors', () => {
       totalRevenues: 20_000,
       revenues: [10_000, 10_000, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     });
+  });
+
+  it('should retrieve invoice options', () => {
+    const missions = [
+      new StubMissionBuilder()
+        .withId('id-stubby-company')
+        .withName('Stubby Company')
+        .withInvoices(generateInvoices({name: 'Stubby Company', workDaysCount: 20, dailyRate: 500, count: 1, begin: on('01/01/2023')}))
+        .build(),
+      new StubMissionBuilder()
+        .withId('id-fancy-company')
+        .withName('Fancy Company')
+        .withInvoices(generateInvoices({name: 'Fancy Company', workDaysCount: 20, dailyRate: 600, count: 1, begin: on('01/02/2023')}))
+        .build()
+    ];
+
+    expect(DashboardSelectors.invoiceOptions()(missions)).toEqual([
+      {id: 'id-stubby-company', name: 'Stubby Company', lastDailyRate: 500},
+      {id: 'id-fancy-company', name: 'Fancy Company', lastDailyRate: 600}
+    ]);
   });
 });
 

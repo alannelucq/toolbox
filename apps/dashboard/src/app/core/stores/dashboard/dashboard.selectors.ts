@@ -63,4 +63,15 @@ export class DashboardSelectors {
       }
     );
   }
+
+  static invoiceOptions() {
+    return createSelector(
+      [DashboardSelectors.slices.missions],
+      missions => missions.map(mission => ({
+        id: mission.id,
+        name: mission.name,
+        lastDailyRate: mission.invoices[mission.invoices.length - 1].dailyRate ?? null
+      }))
+    )
+  }
 }
